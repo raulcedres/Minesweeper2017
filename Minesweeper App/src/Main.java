@@ -1,3 +1,4 @@
+//Dariel J. Ramos
 import javax.swing.JFrame;
 
 public class Main {
