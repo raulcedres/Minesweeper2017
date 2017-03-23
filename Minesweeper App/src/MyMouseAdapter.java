@@ -34,27 +34,27 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.repaint();
 			break;
 		case 3:		//Right mouse button
-			Component r = e.getComponent();
-			while (!(r instanceof JFrame)) {
-				r = r.getParent();
-				if (r == null) {
-					return;
-				}
-			}
-			JFrame myFrame1 = (JFrame)r;
-			MyPanel myPanel1 = (MyPanel) myFrame1.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
-			Insets myInsets1 = myFrame1.getInsets();
-			int x3 = myInsets1.left;
-			int y3 = myInsets1.top;
-			e.translatePoint(-x3, -y3);
-			int x4 = e.getX();
-			int y4= e.getY();
-			myPanel1.x = x4;
-			myPanel1.y = y4;
-			myPanel1.mouseDownGridX = myPanel1.getGridX(x4, y4);
-			myPanel1.mouseDownGridY = myPanel1.getGridY(x4, y4);
-			myPanel1.repaint();
-			break;
+//			Component r = e.getComponent();
+//			while (!(r instanceof JFrame)) {
+//				r = r.getParent();
+//				if (r == null) {
+//					return;
+//				}
+//			}
+//			JFrame myFrame1 = (JFrame)r;
+//			MyPanel myPanel1 = (MyPanel) myFrame1.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
+//			Insets myInsets1 = myFrame1.getInsets();
+//			int x3 = myInsets1.left;
+//			int y3 = myInsets1.top;
+//			e.translatePoint(-x3, -y3);
+//			int x4 = e.getX();
+//			int y4= e.getY();
+//			myPanel1.x = x4;
+//			myPanel1.y = y4;
+//			myPanel1.mouseDownGridX = myPanel1.getGridX(x4, y4);
+//			myPanel1.mouseDownGridY = myPanel1.getGridY(x4, y4);
+//			myPanel1.repaint();
+//			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
 			break;
@@ -228,23 +228,23 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 			
 		case 3:		//Right mouse button
-			Component r = e.getComponent();
-			while (!(r instanceof JFrame)) {
-				r = r.getParent();
-				if (r == null) {
-					return;
-				}
-			}
-			JFrame myFrame1 = (JFrame)r;
-			MyPanel myPanel1 = (MyPanel) myFrame1.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
-			Insets myInsets1 = myFrame1.getInsets();
-			int x3 = myInsets1.left;
-			int y3 = myInsets1.top;
-			e.translatePoint(-x3, -y3);
-			int x4 = e.getX();
-			int y4= e.getY();
-			myPanel1.x = x4;
-			myPanel1.y = y4;
+//			Component r = e.getComponent();
+//			while (!(r instanceof JFrame)) {
+//				r = r.getParent();
+//				if (r == null) {
+//					return;
+//				}
+//			}
+//			JFrame myFrame1 = (JFrame)r;
+//			MyPanel myPanel1 = (MyPanel) myFrame1.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
+//			Insets myInsets1 = myFrame1.getInsets();
+//			int x3 = myInsets1.left;
+//			int y3 = myInsets1.top;
+//			e.translatePoint(-x3, -y3);
+//			int x4 = e.getX();
+//			int y4= e.getY();
+//			myPanel1.x = x4;
+//			myPanel1.y = y4;
 //			int gridX1 = myPanel1.getGridX(x4, y4);
 //			int gridY1 = myPanel1.getGridY(x4, y4);
 //			if ((gridX1 == -1) || (gridY1 == -1)){
