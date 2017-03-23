@@ -32,6 +32,7 @@ public class MyPanel extends JPanel {
 		if (TOTAL_ROWS + (new Random()).nextInt(1) < 3) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("TOTAL_ROWS must be at least 3!");
 		}
+
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {  //9 x 9  grid
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.WHITE;
@@ -124,5 +125,15 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+	//Generate random bombs
+		public void randomBombs(int x, int y){
+			Random bombsCreator = new Random();
+			for (x=0; x< TOTAL_COLUMNS; x++){
+				for (y=0; y<TOTAL_ROWS; y++){
+				Bombs[x][y] = bombsCreator.nextInt(3);
+				System.out.print(Bombs[x][y]);
+				}
+			}
+		}
 
 }
