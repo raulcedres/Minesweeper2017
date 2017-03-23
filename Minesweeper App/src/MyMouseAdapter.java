@@ -48,8 +48,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			while (!(c instanceof JFrame)) {
 				c = c.getParent();
 				if (c == null) {
-					return;
-				}
+					return;}
 			}
 			JFrame myFrame = (JFrame)c;
 			MyPanel myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
@@ -63,7 +62,9 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
-			if ((myPanel.mouseDownGridX <0) || (myPanel.mouseDownGridY <0)) { //hace que nada funcione fuera del grid blanco
+			
+			
+			if ((myPanel.mouseDownGridX ==-1) || (myPanel.mouseDownGridY ==-1)) { //hace que nada funcione fuera del grid blanco
 				//Had pressed outside
 				//Do nothing  
 			} else {
@@ -80,8 +81,6 @@ public class MyMouseAdapter extends MouseAdapter {
 					}
 				}
 			}
-
-
 			myPanel.repaint();
 			break;
 

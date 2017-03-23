@@ -47,4 +47,6 @@ Uncovered squares will be represented by gray squares.
 Uncovered squares will reflect the number of surrounding mines or be empty if no such surrounding mine exits.
  
  */
+	//mouseDownRelease =X de presionar
+	//GridX = x release
 }
