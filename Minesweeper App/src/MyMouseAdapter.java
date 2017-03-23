@@ -1,4 +1,5 @@
 //import java.awt.Color;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
@@ -42,7 +43,7 @@ public class MyMouseAdapter extends MouseAdapter {
 	}
 	public void mouseReleased(MouseEvent e) {
 		switch (e.getButton()) {
-		case 1:		//Left mouse button
+		case 1:		//Soltamos click
 			Component c = e.getComponent();
 			while (!(c instanceof JFrame)) {
 				c = c.getParent();
@@ -62,9 +63,9 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
-			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+			if ((myPanel.mouseDownGridX <0) || (myPanel.mouseDownGridY <0)) { //hace que nada funcione fuera del grid blanco
 				//Had pressed outside
-				//Do nothing
+				//Do nothing  
 			} else {
 				if ((gridX == -1) || (gridY == -1)) {
 					//Is releasing outside
@@ -74,19 +75,19 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					} else {
-						//Released the mouse button on the same cell where it was pressed
+						//Released the mouse button on the same cell where it was pressed					
+						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.GRAY; 
+					}
+				}
+			}
 
-							}
 
-							}
-						}
-
-			
 			myPanel.repaint();
 			break;
-			
-		case 3:		//Right mouse button
 
+		case 3:		//Right mouse button   (Hacer lo de la bandera)
+		
+			
 			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
