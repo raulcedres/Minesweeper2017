@@ -19,7 +19,7 @@ public class MyPanel extends JPanel {
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
-	public int[][] Bombs = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to create the bombs
+	public int[][] Mines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
 	
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
@@ -125,15 +125,5 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
-	//Generate random bombs
-		public void randomBombs(int x, int y){
-			Random bombsCreator = new Random();
-			for (x=0; x< TOTAL_COLUMNS; x++){
-				for (y=0; y<TOTAL_ROWS; y++){
-				Bombs[x][y] = bombsCreator.nextInt(3);
-				System.out.print(Bombs[x][y]);
-				}
-			}
-		}
-
+	
 }
