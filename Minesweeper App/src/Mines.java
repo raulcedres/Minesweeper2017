@@ -38,7 +38,7 @@ public class Mines {
 			}
 		}return false;
 	}
-	public boolean Neighborhood(int x, int y){ //recursive
+	public boolean Neighborhood(int x, int y){ //recursive search
 		if(CellCompare(x+1, y) || CellCompare(x-1,y) || CellCompare(x,y+1) || 
 			CellCompare(x, y-1) || CellCompare(x+1,y+1) || CellCompare(x-1,y-1) || 
 			CellCompare(x-1,y+1) || CellCompare(x+1,y-1)){

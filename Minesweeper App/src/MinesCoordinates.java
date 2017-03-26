@@ -1,6 +1,6 @@
 
 public class MinesCoordinates {
-	private int x,y; // coordinates 
+	private int x,y; 
 
 	public MinesCoordinates(int x,int y){
 		this.x=x;
