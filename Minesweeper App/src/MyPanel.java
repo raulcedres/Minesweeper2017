@@ -22,7 +22,7 @@ public class MyPanel extends JPanel {
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
-	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
+	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines in game
 	
 	public void RevealNextCell(int a, int b){
 		if (a<0 || b<0 || a>TOTAL_ROWS || b>TOTAL_COLUMNS){
