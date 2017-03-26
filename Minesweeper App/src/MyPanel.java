@@ -20,40 +20,38 @@ public class MyPanel extends JPanel {
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
-	public int[][] count = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
+	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
 	public int Mine;
-	Random random = new Random();
-	
-	//Generate random mines
-	public int xMine(){ //x coordinates for random mines
-		int xCord = 0;
-		for (int i=0; i<TOTAL_COLUMNS; i++){
-			xCord = random.nextInt(TOTAL_COLUMNS);
-		} return xCord;
-	}
-	public int yMine(){ // y coordinates for random mines
-		int yCord = 0;
-		for (int j=0; j<TOTAL_ROWS; j++){
-			yCord = random.nextInt(TOTAL_ROWS);
-		} return yCord;
-	}
-	public int randomMines() {
-		for (int i=0; i<15; i++){
-			Mine = count[random.nextInt(TOTAL_COLUMNS)][random.nextInt(TOTAL_ROWS)];
-		} return Mine ;
-	}
+	int counter=0;
+//	Random random = new Random();
+//	
+//	//Generate random mines
+//	public int xMine(){ //x coordinates for random mines
+//		int xCord = 0;
+//		for (int i=0; i<TOTAL_COLUMNS; i++){
+//			xCord = random.nextInt(TOTAL_COLUMNS);
+//		} return xCord;
+//	}
+//	public int yMine(){ // y coordinates for random mines
+//		int yCord = 0;
+//		for (int j=0; j<TOTAL_ROWS; j++){
+//			yCord = random.nextInt(TOTAL_ROWS);
+//		} return yCord;
+//	}
+//	public int randomMines() {
+//		for (int i=0; i<15; i++){
+//			Mine = count[random.nextInt(TOTAL_COLUMNS)][random.nextInt(TOTAL_ROWS)];
+//		} return Mine ;
+//	}
 	
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
-			throw new RuntimeException("INNER_CELL_SIZE must be positive!");
-		}
+			throw new RuntimeException("INNER_CELL_SIZE must be positive!");}
 		if (TOTAL_COLUMNS + (new Random()).nextInt(1) < 2) {	//Use of "random" to prevent unwanted Eclipse warning
-			throw new RuntimeException("TOTAL_COLUMNS must be at least 2!");
-		}
+			throw new RuntimeException("TOTAL_COLUMNS must be at least 2!");}
 		if (TOTAL_ROWS + (new Random()).nextInt(1) < 3) {	//Use of "random" to prevent unwanted Eclipse warning
-			throw new RuntimeException("TOTAL_ROWS must be at least 3!");
-		}
+			throw new RuntimeException("TOTAL_ROWS must be at least 3!");}
 
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {  //9 x 9  grid
 			for (int y = 0; y < TOTAL_ROWS; y++) {
@@ -96,6 +94,7 @@ public class MyPanel extends JPanel {
 				}
 			}
 		}
+		////////////////////////////////////////////
 	}
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
@@ -147,5 +146,45 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+	
+	public void NextToBlock_Display(int x, int y)
+	 {
+		if((x<0)||(y<0) || (x>=9)||(y>=9))
+		 {
+			return;
+		 }
+		
+		if(MyMouseAdapter.mines.Coordinate_Comparision(x,y))
+		 {
+			return;
+		 }
+			
+	    if(MyMouseAdapter.mines.Nearby_Mines(x, y))
+	     {  		 
+        	//int counter = MyMouseAdapter.mines.Nearby_Mines_Counter(x, y);
+        	colorArray[x][y] = Color.GRAY;
+        	countMines[x][y] = counter;
+      		counter++;
+           repaint();
+           return;
+		 }
+			
+	    else 
+	     {		
+			if(colorArray[x][y] == Color.GRAY)
+			{
+				return;
+			}
+			
+			colorArray[x][y] = Color.GRAY;
+			NextToBlock_Display(x-1, y);
+			NextToBlock_Display(x+1, y);
+			NextToBlock_Display(x, y-1);
+			NextToBlock_Display(x, y+1);
+			counter++;
+			;
+			
+		 }
+	 }
 	
 }

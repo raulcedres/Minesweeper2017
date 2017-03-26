@@ -7,9 +7,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
                                                             
 public class MyMouseAdapter extends MouseAdapter {
 	
+	
+	public static PlaceOfMines mines = new PlaceOfMines(10);
 	public void mousePressed(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -65,31 +68,50 @@ public class MyMouseAdapter extends MouseAdapter {
 			int[][] Mousebutton = new int[9][9];
 			
 			
-			if ((myPanel.mouseDownGridX ==-1) || (myPanel.mouseDownGridY ==-1)) { //hace que nada funcione fuera del grid blanco
-				//Had pressed outside
-				//Do nothing  
-			} else {
-				if ((gridX == -1) || (gridY == -1)) {
-					//Is releasing outside
-					//Do nothing
-				} else {
-					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
-						//Released the mouse button on a different cell where it was pressed
-						//Do nothing
-					} else {
-						if (Mousebutton[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == myPanel.randomMines()){
-							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.BLACK;
-						} else {
-						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.GRAY;
+			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
+			 {
+				if(mines.Nearby_Mines(gridX, gridY))
+				 {
+					// Verifies how many mines are around the target cell clicked.
+					//int counter = mines.Nearby_Mines_Counter(gridX, gridY);
 
-						}
-						//Released the mouse button on the same cell where it was pressed		
-//						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.GRAY;
-					}
+					Color newColor = Color.GRAY;
+					myPanel.colorArray[gridX][gridY] = newColor;
+					//myPanel.NearbyMines[gridX][gridY] = counter;
+					myPanel.counter++;
+					myPanel.repaint();
+				} 
+
+				
+				// Paints grid as gray when clicked on an empty spot.
+				else if(!mines.Coordinate_Comparision(gridX, gridY))
+				 {
+					 myPanel.NextToBlock_Display(gridX, gridY);
+
+				 }
+				
+				// Paints a grid black if a mine is on the target cell.
+
+				if(mines.Coordinate_Comparision(gridX, gridY))
+				 {
+					
+					Color newColor = Color.BLACK;
+					myPanel.colorArray[gridX][gridY] = newColor;
+					myPanel.repaint();
+					
+					JOptionPane.showMessageDialog(myFrame,
+							"You clicked on a mine, you lose!",
+							"You lose!",
+							JOptionPane.ERROR_MESSAGE);
+					myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+				
+				
+					System.exit(0);
+
 				}
+
 			}
-			myPanel.repaint();
-			break;
 
 		case 3:		//Right mouse button   (Hacer lo de la bandera)
 		
