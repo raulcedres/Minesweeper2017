@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Mines {
+
 	public int[][] numbers = new int [9][9];
 	public int[][] Mines = new int[9][9];
 	Random random = new Random();
@@ -22,5 +21,17 @@ public class Mines {
 		System.out.println	(numbers[possible.get(xCord)][possible.get(yCord)] = Mine);
 			
 		}
+
+	private MinesCoordinates [] MINE;
+	public int[] xCord;
+	public int[] yCord;
+	
+	public Mines(int x){
+		xCord = new int[x];
+		yCord = new int[x];
+		MINE = new MinesCoordinates [x];
+	}
+	public MinesCoordinates [] getMinesCoordinates(){
+		return MINE;
 	}
 }

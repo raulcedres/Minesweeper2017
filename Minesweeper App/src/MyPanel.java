@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -22,8 +23,33 @@ public class MyPanel extends JPanel {
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
+
 	public int[][] Mines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
 
+	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
+	public int Mine;
+	int counter=0;
+//	Random random = new Random();
+//	
+//	//Generate random mines
+//	public int xMine(){ //x coordinates for random mines
+//		int xCord = 0;
+//		for (int i=0; i<TOTAL_COLUMNS; i++){
+//			xCord = random.nextInt(TOTAL_COLUMNS);
+//		} return xCord;
+//	}
+//	public int yMine(){ // y coordinates for random mines
+//		int yCord = 0;
+//		for (int j=0; j<TOTAL_ROWS; j++){
+//			yCord = random.nextInt(TOTAL_ROWS);
+//		} return yCord;
+//	}
+//	public int randomMines() {
+//		for (int i=0; i<15; i++){
+//			Mine = count[random.nextInt(TOTAL_COLUMNS)][random.nextInt(TOTAL_ROWS)];
+//		} return Mine ;
+//	}
+	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("INNER_CELL_SIZE must be positive!");}
@@ -56,23 +82,24 @@ public class MyPanel extends JPanel {
 
 		//Draw the grid 
 		g.setColor(Color.BLACK);
-		for (int y = 0; y <= TOTAL_ROWS -1; y++) {
+		for (int y = 0; y <= TOTAL_ROWS; y++) {
 			g.drawLine(x1 + GRID_X, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)), x1 + GRID_X + ((INNER_CELL_SIZE + 1) * TOTAL_COLUMNS), y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)));
 		}
 		for (int x = 0; x <= TOTAL_COLUMNS; x++) {
-			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)));
+			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS)));
 		}
 
 		//Paint cell colors(white)
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {  
-			for (int y = 0; y < TOTAL_ROWS-1; y++) { //aqui hice el ajuste para quitar el cuadrito de abajo
-				if ((x == 0) || (y != TOTAL_ROWS - 1)) {
+			for (int y = 0; y < TOTAL_ROWS; y++) { //aqui hice el ajuste para quitar el cuadrito de abajo
+				if ((x == 0) || (y != TOTAL_ROWS)) {
 					Color c = colorArray[x][y];
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				}
 			}
 		}
+		////////////////////////////////////////////
 	}
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
@@ -124,5 +151,45 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+	
+	public void NextToBlock_Display(int x, int y)
+	 {
+		if((x<0)||(y<0) || (x>=9)||(y>=9))
+		 {
+			return;
+		 }
+		
+		if(MyMouseAdapter.mines.Coordinate_Comparision(x,y))
+		 {
+			return;
+		 }
+			
+	    if(MyMouseAdapter.mines.Nearby_Mines(x, y))
+	     {  		 
+        	//int counter = MyMouseAdapter.mines.Nearby_Mines_Counter(x, y);
+        	colorArray[x][y] = Color.GRAY;
+        	countMines[x][y] = counter;
+      		counter++;
+           repaint();
+           return;
+		 }
+			
+	    else 
+	     {		
+			if(colorArray[x][y] == Color.GRAY)
+			{
+				return;
+			}
+			
+			colorArray[x][y] = Color.GRAY;
+			NextToBlock_Display(x-1, y);
+			NextToBlock_Display(x+1, y);
+			NextToBlock_Display(x, y-1);
+			NextToBlock_Display(x, y+1);
+			counter++;
+			;
+			
+		 }
+	 }
 	
 }
