@@ -5,12 +5,11 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-//import java.util.Random;
 
 import javax.swing.JFrame;
-
+                                                            
 public class MyMouseAdapter extends MouseAdapter {
-	//private Random generator = new Random();
+	
 	public void mousePressed(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -63,6 +62,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
+			int[][] Mousebutton = new int[9][9];
 			
 			
 			if ((myPanel.mouseDownGridX ==-1) || (myPanel.mouseDownGridY ==-1)) { //hace que nada funcione fuera del grid blanco
@@ -77,8 +77,14 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					} else {
-						//Released the mouse button on the same cell where it was pressed		
+						if (Mousebutton[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == myPanel.randomMines()){
+							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.BLACK;
+						} else {
 						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.GRAY;
+
+						}
+						//Released the mouse button on the same cell where it was pressed		
+//						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.GRAY;
 					}
 				}
 			}
