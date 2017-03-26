@@ -2,10 +2,12 @@
 //dariel.ramos@upr.edu
 //Raul G. Cedres
 import java.awt.BorderLayout;
+import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Main {
+public class Main extends JPanel{
 	public static void main(String[] args) {
 		JFrame myFrame = new JFrame("Color Grid");
 		
@@ -18,7 +20,7 @@ public class Main {
 
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
-		
+			
 		myFrame.setVisible(true);
 	}
 }

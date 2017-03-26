@@ -44,7 +44,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 		}
 	}
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased (MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Soltamos click
 			Component c = e.getComponent();
@@ -114,7 +114,32 @@ public class MyMouseAdapter extends MouseAdapter {
 			}
 
 		case 3:		//Right mouse button   (Hacer lo de la bandera)
-		
+			c = e.getComponent();
+			while (!(c instanceof JFrame)) {
+				c = c.getParent();
+				if (c == null) {
+					return;
+				}
+			}
+			myFrame = (JFrame)c;
+			myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
+			myInsets = myFrame.getInsets();
+			x1 = myInsets.left;
+			y1 = myInsets.top;
+			e.translatePoint(-x1, -y1);
+			x = e.getX();
+			y = e.getY();
+			myPanel.x = x;
+			myPanel.y = y;
+			gridX = myPanel.getGridX(x, y);
+			gridY = myPanel.getGridY(x, y);
+
+			//paint cell red
+			if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != Color.GRAY)
+			{myPanel.colorArray[myPanel.mouseDownGridX][0]=Color.MAGENTA;
+			myPanel.repaint();}
+			
+			
 			
 			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
