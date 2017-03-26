@@ -18,7 +18,7 @@ public class Main {
 
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
-		
+		myMouseAdapter.Mines();
 		myFrame.setVisible(true);
 	}
 }

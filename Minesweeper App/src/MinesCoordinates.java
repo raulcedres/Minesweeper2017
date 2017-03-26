@@ -2,7 +2,7 @@
 public class MinesCoordinates {
 	private int x,y;
 
-	public void Coordinates(int x,int y){
+	public MinesCoordinates(int x,int y){
 		this.x=x;
 		this.y=y;
 	 }

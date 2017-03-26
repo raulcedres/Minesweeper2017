@@ -17,12 +17,40 @@ public class MyPanel extends JPanel {
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
+	public static Mines MINES;
+	public int counter = 0;
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
 	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
-	public int Mine;
-	int counter=0;
+	
+	public void RevealNextCell(int a, int b){
+		if (a<0 || b<0 || a>TOTAL_ROWS || b>TOTAL_COLUMNS){
+			return;
+		}
+		if (MyMouseAdapter.MINES.CellCompare(a, b)){
+			return;
+		}
+		if(MyMouseAdapter.MINES.Neighborhood(a, b)){
+			int counter = MyMouseAdapter.MINES.Neigborhoodcount(a, b);
+			colorArray[x][y] = Color.GRAY;
+			countMines[x][y] = counter;
+			counter++;
+			repaint();
+			return;			
+		} else {
+			if(colorArray[x][y] == Color.GRAY){
+				return;
+			}
+			colorArray[x][y] = Color.GRAY;
+			RevealNextCell(x-1, y);
+			RevealNextCell(x+1, y);
+			RevealNextCell(x, y-1);
+			RevealNextCell(x, y+1);
+			counter++;
+		}
+	}
+	
 //	Random random = new Random();
 //	
 //	//Generate random mines
@@ -146,45 +174,4 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
-	
-	public void NextToBlock_Display(int x, int y)
-	 {
-		if((x<0)||(y<0) || (x>=9)||(y>=9))
-		 {
-			return;
-		 }
-		
-		if(MyMouseAdapter.mines.Coordinate_Comparision(x,y))
-		 {
-			return;
-		 }
-			
-	    if(MyMouseAdapter.mines.Nearby_Mines(x, y))
-	     {  		 
-        	//int counter = MyMouseAdapter.mines.Nearby_Mines_Counter(x, y);
-        	colorArray[x][y] = Color.GRAY;
-        	countMines[x][y] = counter;
-      		counter++;
-           repaint();
-           return;
-		 }
-			
-	    else 
-	     {		
-			if(colorArray[x][y] == Color.GRAY)
-			{
-				return;
-			}
-			
-			colorArray[x][y] = Color.GRAY;
-			NextToBlock_Display(x-1, y);
-			NextToBlock_Display(x+1, y);
-			NextToBlock_Display(x, y-1);
-			NextToBlock_Display(x, y+1);
-			counter++;
-			;
-			
-		 }
-	 }
-	
 }
