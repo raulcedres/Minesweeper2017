@@ -20,10 +20,7 @@ public class Main extends JPanel{
 
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
-		
-		
-		
-		
+			
 		myFrame.setVisible(true);
 	}
 }
