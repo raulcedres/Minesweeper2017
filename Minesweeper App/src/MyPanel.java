@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -12,23 +11,45 @@ public class MyPanel extends JPanel {
 	private static final int GRID_Y = 25;
 	private static final int INNER_CELL_SIZE = 29;
 	private static final int TOTAL_COLUMNS =9;
-	private static final int TOTAL_ROWS = 9;   //Last row has only one cell
+	private static final int TOTAL_ROWS = 9;  
 	public int x = -1;
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	
-	//public int[][] numberArray = new int[TOTAL_COLUMNS][TOTAL_ROWS];
-	//public int[][] bombArray = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public static Mines MINES;
+	public int counter = 0;
 	
 	//Arrays
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS]; //Array to paint the cells
-
-	public int[][] Mines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
-
-	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines
-	public int Mine;
-	int counter=0;
+	public int[][] countMines = new int[TOTAL_COLUMNS][TOTAL_ROWS]; //Count of mines 
+	
+	public void RevealNextCell(int a, int b){
+		if (a<0 || b<0 || a>TOTAL_ROWS || b>TOTAL_COLUMNS){
+			return;
+		}
+		if (MyMouseAdapter.MINES.CellCompare(a, b)){
+			return;
+		}
+		if(MyMouseAdapter.MINES.Neighborhood(a, b)){
+			int counter = MyMouseAdapter.MINES.Neigborhoodcount(a, b);
+			colorArray[x][y] = Color.GRAY;
+			countMines[x][y] = counter;
+			counter++;
+			repaint();
+			return;			
+		} else {
+			if(colorArray[x][y] == Color.GRAY){
+				return;
+			}
+			colorArray[x][y] = Color.GRAY;
+			RevealNextCell(x-1, y);
+			RevealNextCell(x+1, y);
+			RevealNextCell(x, y-1);
+			RevealNextCell(x, y+1);
+			counter++;
+		}
+	}
+	
 //	Random random = new Random();
 //	
 //	//Generate random mines
@@ -49,6 +70,7 @@ public class MyPanel extends JPanel {
 //			Mine = count[random.nextInt(TOTAL_COLUMNS)][random.nextInt(TOTAL_ROWS)];
 //		} return Mine ;
 //	}
+	
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
@@ -151,45 +173,4 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
-	
-	public void NextToBlock_Display(int x, int y)
-	 {
-		if((x<0)||(y<0) || (x>=9)||(y>=9))
-		 {
-			return;
-		 }
-		
-		if(MyMouseAdapter.mines.Coordinate_Comparision(x,y))
-		 {
-			return;
-		 }
-			
-	    if(MyMouseAdapter.mines.Nearby_Mines(x, y))
-	     {  		 
-        	//int counter = MyMouseAdapter.mines.Nearby_Mines_Counter(x, y);
-        	colorArray[x][y] = Color.GRAY;
-        	countMines[x][y] = counter;
-      		counter++;
-           repaint();
-           return;
-		 }
-			
-	    else 
-	     {		
-			if(colorArray[x][y] == Color.GRAY)
-			{
-				return;
-			}
-			
-			colorArray[x][y] = Color.GRAY;
-			NextToBlock_Display(x-1, y);
-			NextToBlock_Display(x+1, y);
-			NextToBlock_Display(x, y-1);
-			NextToBlock_Display(x, y+1);
-			counter++;
-			;
-			
-		 }
-	 }
-	
 }

@@ -1,13 +1,10 @@
 //Dariel J. Ramos
 //dariel.ramos@upr.edu
-//Raul G. Cedres
-import java.awt.BorderLayout;
-import java.util.Random;
+//Raul G. Cedres De Jesus
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-public class Main extends JPanel{
+public class Main {
 	public static void main(String[] args) {
 		JFrame myFrame = new JFrame("Color Grid");
 		
@@ -20,7 +17,7 @@ public class Main extends JPanel{
 
 		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		myFrame.addMouseListener(myMouseAdapter);
-			
+		myMouseAdapter.Mines();
 		myFrame.setVisible(true);
 	}
 }

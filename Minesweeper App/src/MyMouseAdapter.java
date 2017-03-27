@@ -1,5 +1,3 @@
-//import java.awt.Color;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
@@ -10,9 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
                                                             
 public class MyMouseAdapter extends MouseAdapter {
-	
-	
-	public static PlaceOfMines mines = new PlaceOfMines(10);
+		
+	public static Mines MINES = new Mines(15); //Use methods of class 
+	int counter=15;
 	public void mousePressed(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -44,7 +42,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 		}
 	}
-	public void mouseReleased (MouseEvent e) {
+	public void mouseReleased(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Soltamos click
 			Component c = e.getComponent();
@@ -65,86 +63,55 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
-			int[][] Mousebutton = new int[9][9];
 			
 			
-			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
-			 {
-				if(mines.Nearby_Mines(gridX, gridY))
-				 {
-					// Verifies how many mines are around the target cell clicked.
-					//int counter = mines.Nearby_Mines_Counter(gridX, gridY);
-
-					Color newColor = Color.GRAY;
-					myPanel.colorArray[gridX][gridY] = newColor;
-					//myPanel.NearbyMines[gridX][gridY] = counter;
-					myPanel.counter++;
-					myPanel.repaint();
-				} 
-
-				
-				// Paints grid as gray when clicked on an empty spot.
-				else if(!mines.Coordinate_Comparision(gridX, gridY))
-				 {
-					 myPanel.NextToBlock_Display(gridX, gridY);
-
-				 }
-				
-				// Paints a grid black if a mine is on the target cell.
-
-				if(mines.Coordinate_Comparision(gridX, gridY))
-				 {
-					
-					Color newColor = Color.BLACK;
-					myPanel.colorArray[gridX][gridY] = newColor;
-					myPanel.repaint();
-					
-					JOptionPane.showMessageDialog(myFrame,
-							"You clicked on a mine, you lose!",
-							"You lose!",
-							JOptionPane.ERROR_MESSAGE);
-					myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
-				
-				
-					System.exit(0);
-
+			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+				//Outside frame, do nothing..
+			} else {
+				if ((gridX == -1) || (gridY == -1)) {
+					//Is releasing outside
+					//Do nothing
+				} else {
+					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
+						//Released the mouse button on a different cell where it was pressed
+						//Do nothing
+					} else {//Released the mouse button on the same cell where it was pressed
+						if (MINES.Neighborhood(gridX, gridY)) {
+							//Reveals count of bombs around
+							int counter = MINES.Neigborhoodcount(gridX, gridY);
+							Color newColor = Color.GRAY;
+							myPanel.colorArray[gridX][gridY] = newColor;
+							myPanel.countMines[gridX][gridY] = counter;
+							myPanel.counter++;
+							myPanel.repaint();
+						} else {
+							if(MINES.CellCompare(gridX, gridY)){
+							myPanel.RevealNextCell(gridX, gridY);
+							} else{
+								Color newColor = Color.BLACK;
+								myPanel.colorArray[gridX][gridY] = newColor;
+								myPanel.repaint();
+								
+								JOptionPane.showMessageDialog(myFrame, "You pressed a mine!", "You Lost!", JOptionPane.ERROR_MESSAGE);
+								myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							  }
+						  }
+					}
 				}
-
 			}
+						myPanel.repaint();
+						break;
 
 		case 3:		//Right mouse button   (Hacer lo de la bandera)
-			c = e.getComponent();
-			while (!(c instanceof JFrame)) {
-				c = c.getParent();
-				if (c == null) {
-					return;
-				}
-			}
-			myFrame = (JFrame)c;
-			myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
-			myInsets = myFrame.getInsets();
-			x1 = myInsets.left;
-			y1 = myInsets.top;
-			e.translatePoint(-x1, -y1);
-			x = e.getX();
-			y = e.getY();
-			myPanel.x = x;
-			myPanel.y = y;
-			gridX = myPanel.getGridX(x, y);
-			gridY = myPanel.getGridY(x, y);
-
-			//paint cell red
-			if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != Color.GRAY)
-			{myPanel.colorArray[myPanel.mouseDownGridX][0]=Color.MAGENTA;
-			myPanel.repaint();}
-			
-			
+		
 			
 			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
 			break;
 		}
+	}
+	public void Mines(){
+		MINES.setMinesCoordinates();
 	}
 }
