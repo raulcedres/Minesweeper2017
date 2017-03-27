@@ -9,7 +9,7 @@ public class Main {
 		JFrame myFrame = new JFrame("Color Grid");
 		
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		myFrame.setSize(400, 400); 
+		myFrame.setSize(418, 440); 
 		myFrame.setLocationRelativeTo(null);// centra el minesweeper
 		
 		MyPanel myPanel = new MyPanel();
