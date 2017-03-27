@@ -27,7 +27,13 @@ public class Mines {
 			YCORD[j] = MINE[j].getY();
 		}
 	}
-	
+	public void GameLost(){
+		for (int x=0; x<=9; x++){
+			for (int y=0; y<=9; y++){
+				
+			}
+		}
+	}
 	
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
 	 { // Method to compare two different coordinates	

@@ -20,6 +20,8 @@ public class MyPanel extends JPanel
 	public static Mines Mines;
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int countMines[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public int cellArray[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public boolean GameLost = false;
 
 	public MyPanel() 
 	 {   
@@ -114,6 +116,19 @@ public class MyPanel extends JPanel
 				 }
 			 }
 		 }
+		for (int x = 0; x < TOTAL_COLUMNS; x++){
+			for (int y = 0; y < TOTAL_ROWS; y++) {
+				if(GameLost){
+					if(countMines[x][y] == 1){
+					g.setColor(Color.BLACK);
+					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+				} else {
+					g.setColor(Color.WHITE);
+					g.drawString(cellArray[x][y]+"", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 11, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20);
+					}
+				}	
+			}
+		}
 	 }
 
 // GETTERS
@@ -227,4 +242,12 @@ public class MyPanel extends JPanel
 			
 		 }
 	 }
+	public void lostGame (){
+		for (int x=0; x<= TOTAL_COLUMNS; x++){
+			for (int y=0; y<= TOTAL_ROWS; y++){
+				
+			colorArray[Mines.getMinesCoordinates().length][Mines.getMinesCoordinates().length] = Color.BLACK;
+			}
+		}
+	}
  }

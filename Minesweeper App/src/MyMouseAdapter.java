@@ -41,7 +41,7 @@ public class MyMouseAdapter extends MouseAdapter
 			myPanel.repaint();
 			break;
 	    
-			case 2:        //Right mouse button
+			case 2:        //Right mouse button paints color red if user thinks it is a mine
 			Component d = e.getComponent();
 			while (!(d instanceof JFrame)) 
 			{
@@ -58,12 +58,12 @@ public class MyMouseAdapter extends MouseAdapter
 			int x_1 = my_Insets.left;
 			int y_1 = my_Insets.top;
 			e.translatePoint(-x_1, -y_1);
-			int small_x = e.getX();
-			int small_y = e.getY();
-			my_Panel.x = small_x;
-			my_Panel.y = small_y;
-			my_Panel.mouseDownGridX = my_Panel.getGridX(small_x, small_y);
-			my_Panel.mouseDownGridY = my_Panel.getGridY(small_x, small_y);
+			int X1 = e.getX();
+			int Y1 = e.getY();
+			my_Panel.x = X1;
+			my_Panel.y = Y1;
+			my_Panel.mouseDownGridX = my_Panel.getGridX(X1, Y1);
+			my_Panel.mouseDownGridY = my_Panel.getGridY(X1, Y1);
 			my_Panel.repaint();
 			break;
 		    default:    //Some other button (2 = Middle mouse button, etc.)
@@ -105,7 +105,7 @@ public class MyMouseAdapter extends MouseAdapter
 			 {
 				if(MINE.Neighborhood(gridX, gridY))
 				 {
-					// Verifies how many mines are around the target cell clicked.
+					// Verifies how many mines are around the clicked cell
 					int counter = MINE.Neigborhoodcount(gridX, gridY);
 
 					Color newColor = Color.GRAY;
@@ -127,9 +127,8 @@ public class MyMouseAdapter extends MouseAdapter
 
 				if(MINE.CellCompare(gridX, gridY))
 				 {
-					
-					Color newColor = Color.BLACK;
-					myPanel.colorArray[gridX][gridY] = newColor;
+					myPanel.colorArray[gridX][gridY] = Color.BLACK;
+					myPanel.GameLost = true;
 					myPanel.repaint();
 					
 					JOptionPane.showMessageDialog(myFrame,
@@ -165,12 +164,12 @@ public class MyMouseAdapter extends MouseAdapter
 			int x_1 = my_Insets.left;
 			int y_1 = my_Insets.top;
 			e.translatePoint(-x_1, -y_1);
-			int small_x = e.getX();
-			int small_y = e.getY();
-			my_Panel.x = small_x;
-			my_Panel.y = small_y;
-			int grid_X = my_Panel.getGridX(small_x, small_y);
-			int grid_Y = my_Panel.getGridY(small_x, small_y);
+			int X1 = e.getX();
+			int Y1 = e.getY();
+			my_Panel.x = X1;
+			my_Panel.y = Y1;
+			int grid_X = my_Panel.getGridX(X1, Y1);
+			int grid_Y = my_Panel.getGridY(X1, Y1);
 
 			my_Panel.repaint();
 
