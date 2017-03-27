@@ -15,22 +15,26 @@ public class Mines {
 	}
 	public void setMinesCoordinates(){
 		Random generate = new Random();
-		for (int i=0; i<15; i++){
+		for (int i=0; i<10; i++){
 			int xcoord = generate.nextInt(9);
 			int ycoord = generate.nextInt(9);
 			MINE[i] = new MinesCoordinates(xcoord, ycoord);
 		}
-		int XCORD [] = new int[9];
-		int YCORD [] = new int[9];
-		for(int j=0; j<9; j++){
+		int XCORD [] = new int[10];
+		int YCORD [] = new int[10];
+		for(int j=0; j<10; j++){
 			XCORD[j] = MINE[j].getX();
 			YCORD[j] = MINE[j].getY();
 		}
 	}
+	
+	
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
 	 { // Method to compare two different coordinates	
 		 return x == c.getX() && y == c.getY();			
 	 }
+	
+	
 	public boolean CellCompare(int x, int y){
 		for (int i=0; i<MINE.length; i++){
 			if(CellComparison(x, y, MINE[i])){
