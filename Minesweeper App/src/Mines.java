@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Mines {
 	private MinesCoordinates [] MINE;
-	public static int[] xCord;
+	private static int[] xCord;
 	public static int[] yCord;
 	
 	public Mines(int x){
@@ -31,7 +31,7 @@ public class Mines {
 			YCORD[j] = MINE[j].getY();
 		}
 	}
-	
+
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
 	 { // Method to compare two different coordinates	
 		 return x == c.getX() && y == c.getY();			
@@ -63,5 +63,17 @@ public class Mines {
 				}
 			}
 		} return counter;
+	}
+	public static int[] getxCord() {
+		return xCord;
+	}
+	public static void setxCord(int[] xCord) {
+		Mines.xCord = xCord;
+	}
+	public static int[] getyCord() {
+		return yCord;
+	}
+	public static void setyCord(int[] yCord) {
+		Mines.yCord = yCord;
 	}
 }
