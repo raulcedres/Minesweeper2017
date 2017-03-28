@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Mines {
 	private MinesCoordinates [] MINE;
-	private static int[] xCord;
+	public static int[] xCord;
 	public static int[] yCord;
 	
 	public Mines(int x){
@@ -63,17 +63,5 @@ public class Mines {
 				}
 			}
 		} return counter;
-	}
-	public static int[] getxCord() {
-		return xCord;
-	}
-	public static void setxCord(int[] xCord) {
-		Mines.xCord = xCord;
-	}
-	public static int[] getyCord() {
-		return yCord;
-	}
-	public static void setyCord(int[] yCord) {
-		Mines.yCord = yCord;
 	}
 }

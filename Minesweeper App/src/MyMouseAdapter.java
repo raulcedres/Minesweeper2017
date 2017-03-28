@@ -115,14 +115,18 @@ public class MyMouseAdapter extends MouseAdapter
 					} else {
 						if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
 						 { if(MINE.CellCompare(gridX, gridY)){ // Paints a grid black if a mine is on the target cell.
-
-									myPanel.colorArray[gridX][gridY] = Color.BLACK;
+							 myPanel.colorArray[gridX][gridY] = Color.BLACK;
+							 
+							 for (int a=0; a<=9; a++){
+							 		for (int b=0; b<=9; b++){
+							 			if(MINE.CellCompare(a, b))
+									myPanel.colorArray[a][b] = Color.BLACK;
 									myPanel.GameLost = true;
-									myPanel.repaint();
-									
-									JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
-									
-									System.exit(0);
+							 		}
+							 	}myPanel.repaint();
+							 	JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
+								
+								System.exit(0);
 						 } else{
 							if(MINE.Neighborhood(gridX, gridY))
 							 {
