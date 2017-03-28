@@ -132,8 +132,7 @@ public class MyMouseAdapter extends MouseAdapter
 					myPanel.GameLost = true;
 					
 					JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
-					myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
+					
 					System.exit(0);
 
 				 		}
