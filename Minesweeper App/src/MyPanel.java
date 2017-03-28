@@ -104,6 +104,7 @@ public class MyPanel extends JPanel
 				 }
 			 }
 		 }
+
 		for (int x = 0; x < TOTAL_COLUMNS; x++){
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if(GameLost){
@@ -118,6 +119,8 @@ public class MyPanel extends JPanel
 				} 
 			}
 		}
+
+
 	 }
 
 // GETTERS
@@ -227,11 +230,6 @@ public class MyPanel extends JPanel
 			RevealNextCell(x, y-1);
 			RevealNextCell(x, y+1);
 			counter++;
-			
-			
 		 }
 	 }
-	public void lostGame (){
-		
-	}
  }

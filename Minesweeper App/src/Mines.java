@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Mines {
 	private MinesCoordinates [] MINE;
@@ -14,11 +14,15 @@ public class Mines {
 		return MINE;
 	}
 	public void setMinesCoordinates(){
-		Random generate = new Random();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int a=0; a<9; a++){
+			for (int b=0; b<9; b++){
+				list.add(a*100+b);
+			}
+		}
 		for (int i=0; i<15; i++){
-			int xcoord = generate.nextInt(9);
-			int ycoord = generate.nextInt(9);
-			MINE[i] = new MinesCoordinates(xcoord, ycoord);
+			int choice = (int)(Math.random()*list.size());
+			MINE[i] = new MinesCoordinates(list.get(choice)/100, list.get(choice)%100);
 		}
 		int XCORD [] = new int[15];
 		int YCORD [] = new int[15];
@@ -27,7 +31,7 @@ public class Mines {
 			YCORD[j] = MINE[j].getY();
 		}
 	}
-	
+
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
 	 { // Method to compare two different coordinates	
 		 return x == c.getX() && y == c.getY();			
