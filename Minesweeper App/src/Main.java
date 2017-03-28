@@ -1,6 +1,3 @@
-//Dariel J. Ramos
-//dariel.ramos@upr.edu
-//Raul G. Cedres De Jesus
 
 import javax.swing.JFrame;
 

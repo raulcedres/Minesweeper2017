@@ -121,7 +121,6 @@ public class MyMouseAdapter extends MouseAdapter
 							 		for (int b=0; b<=9; b++){
 							 			if(MINE.CellCompare(a, b))
 									myPanel.colorArray[a][b] = Color.BLACK;
-									myPanel.GameLost = true;
 							 		}
 							 	}myPanel.repaint();
 							 	JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
@@ -153,44 +152,6 @@ public class MyMouseAdapter extends MouseAdapter
 			}
 		}
 				break;
-			//On the grid other than on the left column and on the top row:
-//			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
-//			 {
-//				if(MINE.Neighborhood(gridX, gridY))
-//				 {
-//					// Verifies how many mines are around the clicked cell
-//					int counter = MINE.Neigborhoodcount(gridX, gridY);
-//
-//					Color newColor = Color.GRAY;
-//					myPanel.colorArray[gridX][gridY] = newColor;
-//					myPanel.countMines[gridX][gridY] = counter;
-//					myPanel.counter++;
-//					myPanel.repaint();
-//				} 
-//
-//				
-//				// Paints grid as gray when clicked on an empty spot.
-//				else if(!MINE.CellCompare(gridX, gridY))
-//				 {
-//					 myPanel.RevealNextCell(gridX, gridY);
-//
-//				 }
-//				
-//				// Paints a grid black if a mine is on the target cell.
-//				
-//				if(MINE.CellCompare(gridX, gridY))
-//				 {
-//					myPanel.colorArray[gridX][gridY] = Color.BLACK;
-//					myPanel.GameLost = true;
-//					myPanel.repaint();
-//					
-//					JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
-//					
-//					System.exit(0);
-//			}	
-//		 }
-			
-//			break;
 	
 			case 3:        //Right mouse button
 			Component d = e.getComponent();
