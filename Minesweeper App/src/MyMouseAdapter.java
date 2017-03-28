@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 public class MyMouseAdapter extends MouseAdapter 
  {
 	
-	int counter = 10;
-	public static  Mines MINE = new Mines(10);
+	int counter = 15;
+	public static  Mines MINE = new Mines(15);
 	public void mousePressed(MouseEvent e) 
 	 {
 		switch (e.getButton()) 
@@ -124,26 +124,23 @@ public class MyMouseAdapter extends MouseAdapter
 				 }
 				
 				// Paints a grid black if a mine is on the target cell.
-
+				for(int i=0; i<=9; i++){
+					for(int j=0; j<=9; j++){
 				if(MINE.CellCompare(gridX, gridY))
 				 {
 					myPanel.colorArray[gridX][gridY] = Color.BLACK;
 					myPanel.GameLost = true;
-					myPanel.repaint();
 					
-					JOptionPane.showMessageDialog(myFrame,
-							"You clicked on a mine, you lose!",
-							"You lose!",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
 					myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-				
-				
 					System.exit(0);
 
-				}
-
-			}
+				 		}
+					}	
+			}myPanel.repaint();
+				
+		 }
 			
 			break;
 	
