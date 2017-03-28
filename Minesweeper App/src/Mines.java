@@ -15,23 +15,16 @@ public class Mines {
 	}
 	public void setMinesCoordinates(){
 		Random generate = new Random();
-		for (int i=0; i<10; i++){
+		for (int i=0; i<15; i++){
 			int xcoord = generate.nextInt(9);
 			int ycoord = generate.nextInt(9);
 			MINE[i] = new MinesCoordinates(xcoord, ycoord);
 		}
-		int XCORD [] = new int[10];
-		int YCORD [] = new int[10];
-		for(int j=0; j<10; j++){
+		int XCORD [] = new int[15];
+		int YCORD [] = new int[15];
+		for(int j=0; j<15; j++){
 			XCORD[j] = MINE[j].getX();
 			YCORD[j] = MINE[j].getY();
-		}
-	}
-	public void GameLost(){
-		for (int x=0; x<=9; x++){
-			for (int y=0; y<=9; y++){
-				
-			}
 		}
 	}
 	

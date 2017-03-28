@@ -20,7 +20,6 @@ public class MyPanel extends JPanel
 	public static Mines Mines;
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int countMines[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
-	public int cellArray[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
 	public boolean GameLost = false;
 
 	public MyPanel() 
@@ -74,12 +73,9 @@ public class MyPanel extends JPanel
 			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS )));}
 
 		//Paint cell colors
-		for (int x = 0; x < TOTAL_COLUMNS; x++) 
-		 {
-			for (int y = 0; y < TOTAL_ROWS+1; y++) 
-			 {
-				if ( (y != TOTAL_ROWS )) 
-				 {
+		for (int x = 0; x < TOTAL_COLUMNS; x++) {
+			for (int y = 0; y < TOTAL_ROWS+1; y++) {
+				if ( (y != TOTAL_ROWS )) {
 					Color c = colorArray[x][y];
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
@@ -87,29 +83,21 @@ public class MyPanel extends JPanel
 			 }
 		 }
 		
-		for (int x = 0; x < TOTAL_COLUMNS; x++) 
-		 {
-			for (int y = 0; y < TOTAL_ROWS; y++) 
-			 {
-				if ( (countMines[x][y] != 0) && colorArray[x][y] != Color.BLACK) 
-				 {
+		for (int x = 0; x < TOTAL_COLUMNS; x++) {
+			for (int y = 0; y < TOTAL_ROWS; y++) {
+				if ( (countMines[x][y] != 0) && colorArray[x][y] != Color.BLACK) {
 					int counter = countMines[x][y];
 					
-					if (counter == 1)
-					 {
+					if (counter == 1){
 						g.setColor(Color.GREEN);
 					 }
 					
-					else if (counter == 2)
-					  {
+					else if (counter == 2){
 						g.setColor(Color.BLUE);
-						
-					}
-					else if (counter == 3)
-					{
+					 }
+					else if (counter == 3){
 						g.setColor(Color.ORANGE);
-					}
-					
+					 }
 					else g.setColor(Color.RED);
 					
 					g.drawString(String.valueOf(counter), x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 18, y1 + GRID_Y + (y * (INNER_CELL_SIZE +1)) + 25);
@@ -119,14 +107,12 @@ public class MyPanel extends JPanel
 		for (int x = 0; x < TOTAL_COLUMNS; x++){
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if(GameLost){
-					if(countMines[x][y] == 1){
+					if (countMines[x][y] == 1){
 					g.setColor(Color.BLACK);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 				} else {
-					g.setColor(Color.WHITE);
-					g.drawString(cellArray[x][y]+"", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 11, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 20);
 					}
-				}	
+				} 
 			}
 		}
 	 }
@@ -243,11 +229,6 @@ public class MyPanel extends JPanel
 		 }
 	 }
 	public void lostGame (){
-		for (int x=0; x<= TOTAL_COLUMNS; x++){
-			for (int y=0; y<= TOTAL_ROWS; y++){
-				
-			colorArray[Mines.getMinesCoordinates().length][Mines.getMinesCoordinates().length] = Color.BLACK;
-			}
-		}
+		
 	}
  }
