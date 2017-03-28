@@ -100,48 +100,97 @@ public class MyMouseAdapter extends MouseAdapter
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
 
-			//On the grid other than on the left column and on the top row:
-			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
-			 {
-				if(MINE.Neighborhood(gridX, gridY))
-				 {
-					// Verifies how many mines are around the clicked cell
-					int counter = MINE.Neigborhoodcount(gridX, gridY);
-
-					Color newColor = Color.GRAY;
-					myPanel.colorArray[gridX][gridY] = newColor;
-					myPanel.countMines[gridX][gridY] = counter;
-					myPanel.counter++;
-					myPanel.repaint();
-				} 
-
-				
-				// Paints grid as gray when clicked on an empty spot.
-				else if(!MINE.CellCompare(gridX, gridY))
-				 {
-					 myPanel.RevealNextCell(gridX, gridY);
-
-				 }
-				
-				// Paints a grid black if a mine is on the target cell.
-				for(int i=0; i<=9; i++){
-					for(int j=0; j<=9; j++){
-				if(MINE.CellCompare(gridX, gridY))
-				 {
-					myPanel.colorArray[gridX][gridY] = Color.BLACK;
-					myPanel.GameLost = true;
-					
-					JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
-					
-					System.exit(0);
-
-				 		}
-					}	
-			}myPanel.repaint();
-				
-		 }
 			
-			break;
+			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+				//Had pressed outside
+				//Do nothing
+			} else {
+				if ((gridX == -1) || (gridY == -1)) {
+					//Is releasing outside
+					//Do nothing
+				} else {
+					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
+						//Released the mouse button on a different cell where it was pressed
+						//Do nothing
+					} else {
+						if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
+						 { if(MINE.CellCompare(gridX, gridY)){ // Paints a grid black if a mine is on the target cell.
+							 myPanel.colorArray[gridX][gridY] = Color.BLACK;
+							 
+							 for (int a=0; a<=9; a++){
+							 		for (int b=0; b<=9; b++){
+							 			if(MINE.CellCompare(a, b))
+									myPanel.colorArray[a][b] = Color.BLACK;
+									myPanel.GameLost = true;
+							 		}
+							 	}myPanel.repaint();
+							 	JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
+								
+								System.exit(0);
+						 } else{
+							if(MINE.Neighborhood(gridX, gridY))
+							 {
+								// Verifies how many mines are around the clicked cell
+								int counter = MINE.Neigborhoodcount(gridX, gridY);
+
+								Color newColor = Color.GRAY;
+								myPanel.colorArray[gridX][gridY] = newColor;
+								myPanel.countMines[gridX][gridY] = counter;
+								myPanel.counter++;
+								myPanel.repaint();
+							} 
+
+							
+							// Paints grid as gray when clicked on an empty spot.
+							else if(!MINE.CellCompare(gridX, gridY))
+							 {
+								 myPanel.RevealNextCell(gridX, gridY);
+
+							 }				
+						 }
+					}
+				}
+			}
+		}
+				break;
+			//On the grid other than on the left column and on the top row:
+//			if(gridX >= 0 && gridX <= 8 && gridY >= 0 && gridY <= 8)
+//			 {
+//				if(MINE.Neighborhood(gridX, gridY))
+//				 {
+//					// Verifies how many mines are around the clicked cell
+//					int counter = MINE.Neigborhoodcount(gridX, gridY);
+//
+//					Color newColor = Color.GRAY;
+//					myPanel.colorArray[gridX][gridY] = newColor;
+//					myPanel.countMines[gridX][gridY] = counter;
+//					myPanel.counter++;
+//					myPanel.repaint();
+//				} 
+//
+//				
+//				// Paints grid as gray when clicked on an empty spot.
+//				else if(!MINE.CellCompare(gridX, gridY))
+//				 {
+//					 myPanel.RevealNextCell(gridX, gridY);
+//
+//				 }
+//				
+//				// Paints a grid black if a mine is on the target cell.
+//				
+//				if(MINE.CellCompare(gridX, gridY))
+//				 {
+//					myPanel.colorArray[gridX][gridY] = Color.BLACK;
+//					myPanel.GameLost = true;
+//					myPanel.repaint();
+//					
+//					JOptionPane.showMessageDialog(myFrame, "You touched a mine","GAME OVER!", JOptionPane.ERROR_MESSAGE);
+//					
+//					System.exit(0);
+//			}	
+//		 }
+			
+//			break;
 	
 			case 3:        //Right mouse button
 			Component d = e.getComponent();

@@ -31,7 +31,7 @@ public class Mines {
 			YCORD[j] = MINE[j].getY();
 		}
 	}
-	
+
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
 	 { // Method to compare two different coordinates	
 		 return x == c.getX() && y == c.getY();			
