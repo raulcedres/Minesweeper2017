@@ -6,7 +6,7 @@ public class Main {
 		JFrame myFrame = new JFrame("Minesweeper");
 		
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		myFrame.setSize(418, 440); 
+		myFrame.setSize(400, 400); 
 		myFrame.setLocationRelativeTo(null);
 		
 		MyPanel myPanel = new MyPanel();
