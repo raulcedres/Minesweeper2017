@@ -67,7 +67,6 @@ public class MyPanel extends JPanel
 	public void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
-
 		//Compute interior coordinates
 
 		Insets myInsets = getInsets();
