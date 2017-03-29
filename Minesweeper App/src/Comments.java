@@ -20,7 +20,6 @@ When this happens the game should uncover all remaining squares containing mines
 
 
 The user wins when all squares without mines are uncovered.
-
 Use the provided source code as a starting point as follows:
 
 Use the 9x9 grid with white squares as your minefield region
