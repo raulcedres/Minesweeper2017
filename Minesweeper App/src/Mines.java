@@ -15,18 +15,18 @@ public class Mines {
 	}
 	public void setMinesCoordinates(){
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int a=0; a<9; a++){
-			for (int b=0; b<9; b++){
+		for (int a=0; a<5; a++){
+			for (int b=0; b<5; b++){
 				list.add(a*100+b);
 			}
 		}
-		for (int i=0; i<15; i++){
+		for (int i=0; i<5; i++){
 			int choice = (int)(Math.random()*list.size());
 			MINE[i] = new MinesCoordinates(list.get(choice)/100, list.get(choice)%100);
 		}
-		int XCORD [] = new int[15];
-		int YCORD [] = new int[15];
-		for(int j=0; j<15; j++){
+		int XCORD [] = new int[5];
+		int YCORD [] = new int[5];
+		for(int j=0; j<5; j++){
 			XCORD[j] = MINE[j].getX();
 			YCORD[j] = MINE[j].getY();
 		}
