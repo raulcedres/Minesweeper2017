@@ -14,7 +14,7 @@ public class Mines {
 		return MINE;
 	}
 	public void setMinesCoordinates(){
-		ArrayList<Integer> list = new ArrayList<Integer>();
+		ArrayList<Integer> list = new ArrayList<Integer>(); //Array to avoid repeted random mines
 		for (int a=0; a<9; a++){
 			for (int b=0; b<9; b++){
 				list.add(a*100+b);
@@ -33,7 +33,7 @@ public class Mines {
 	}
 
 	public boolean CellComparison(int x, int y, MinesCoordinates c) 
-	 { // Method to compare two different coordinates	
+	 { // Compares two coordinates
 		 return x == c.getX() && y == c.getY();			
 	 }
 	
@@ -52,7 +52,7 @@ public class Mines {
 			return true;
 		}return false;
 	}
-	public int Neigborhoodcount(int x, int y){
+	public int Neigborhoodcount(int x, int y){ //counts mines around cell
 		int counter = 0;
 		for (int a= x-1; a<= x+1; a++){
 			for (int b= y-1; b<= y+1; b++){
