@@ -7,7 +7,7 @@ public class Main {
 		
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setSize(418, 440); 
-		myFrame.setLocationRelativeTo(null);// centra el minesweeper
+		myFrame.setLocationRelativeTo(null);
 		
 		MyPanel myPanel = new MyPanel();
 		myFrame.add(myPanel);

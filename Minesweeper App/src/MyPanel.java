@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel
@@ -23,7 +21,6 @@ public class MyPanel extends JPanel
 	public static Mines Mines;
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int countMines[][] = new int[TOTAL_COLUMNS][TOTAL_ROWS];
-	public boolean GameLost = false;
 
 	public MyPanel() 
 	{   
@@ -46,7 +43,7 @@ public class MyPanel extends JPanel
 	}
 
 
-//Metodo de ganador
+ //Method to determine if user won
 	public boolean getAWinner(){
 		int  counterGray=0;
 
@@ -60,8 +57,7 @@ public class MyPanel extends JPanel
 		}
 
 		if(counterGray==76)
-		{   JOptionPane.showMessageDialog(null, "You actually won at Minesweeper. Not bad.");
-		System.exit(0);
+		{   
 		return true;
 		}
 		return false;
@@ -110,7 +106,7 @@ public class MyPanel extends JPanel
 				}
 			}
 		}
-
+		//Assign diferent colors for each count number
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if ( (countMines[x][y] != 0) && colorArray[x][y] != Color.BLACK) {
@@ -206,35 +202,24 @@ public class MyPanel extends JPanel
 		}
 		return y;
 	}
-	public void RevealNextCell(int x, int y)
-	{
-		if((x<0)||(y<0) || (x>=9)||(y>=9))
-		{
+	public void RevealNextCell(int x, int y){
+		if((x<0)||(y<0) || (x>=9)||(y>=9)){
 			return;
 		}
-
-		if(MyMouseAdapter.MINE.CellCompare(x,y))
-		{
+		if(MyMouseAdapter.MINE.CellCompare(x,y)){
 			return;
 		}
-
-		if(MyMouseAdapter.MINE.Neighborhood(x, y))
-		{  		 
+		if(MyMouseAdapter.MINE.Neighborhood(x, y)){  		 
 			int counter = MyMouseAdapter.MINE.Neigborhoodcount(x, y);
 			colorArray[x][y] = Color.GRAY;
 			countMines[x][y] = counter;
 			counter++;
 			repaint();
 			return;
-		}
-
-		else 
-		{		
-			if(colorArray[x][y] == Color.GRAY)
-			{
+		}else {		
+			if(colorArray[x][y] == Color.GRAY){
 				return;
 			}
-
 			colorArray[x][y] = Color.GRAY;
 			RevealNextCell(x-1, y);
 			RevealNextCell(x+1, y);
